@@ -1,15 +1,15 @@
-# 1. Project guidelines
+# 1. MMR2 Project guidelines
 
 ## 1.1 Project structure
 
-New projects should follow the Android Gradle project structure that is defined on the [Android Gradle plugin user guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Project-Structure). The [ribot Boilerplate](https://github.com/ribot/android-boilerplate) project is a good reference to start from.
+MMR2 projects should follow the MMR1 project structure. 
 
 ## 1.2 File naming
 
 ### 1.2.1 Class files
 Class names are written in [UpperCamelCase](http://en.wikipedia.org/wiki/CamelCase).
 
-For classes that extend an Android component, the name of the class should end with the name of the component; for example: `SignInActivity`, `SignInFragment`, `ImageUploaderService`, `ChangePasswordDialog`.
+For classes that extend an Android component, the name of the class should end with the name of the component; for example: `LoginActivity`, `FPADialogFragment`, `LoginViewModel`,`OktaService`, `FingerprintButtonBindingModel`.
 
 ### 1.2.2 Resources files
 
@@ -59,21 +59,19 @@ Layout files should match the name of the Android components that they are inten
 
 | Component        | Class Name             | Layout Name                   |
 | ---------------- | ---------------------- | ----------------------------- |
-| Activity         | `UserProfileActivity`  | `activity_user_profile.xml`   |
-| Fragment         | `SignUpFragment`       | `fragment_sign_up.xml`        |
+| Activity         | `LoginActivity`        | `activity_login.xml`          |
+| Fragment         | `WelcomeScreenFragment`| `fragment_welcome_screen.xml` |
 | Dialog           | `ChangePasswordDialog` | `dialog_change_password.xml`  |
-| AdapterView item | ---                    | `item_person.xml`             |
-| Partial layout   | ---                    | `partial_stats_bar.xml`       |
+| AdapterView item | ---                    | `view_add_pharmacy.xml`       |
+| Partial layout   | ---                    | `layout_custom_support_item.xml`|
 
-A slightly different case is when we are creating a layout that is going to be inflated by an `Adapter`, e.g to populate a `ListView`. In this case, the name of the layout should start with `item_`.
+A slightly different case is when we are creating a layout that is going to be inflated by an `Adapter`, e.g to populate a `ListView`. In this case, the name of the layout should start with `view_`.
 
-Note that there are cases where these rules will not be possible to apply. For example, when creating layout files that are intended to be part of other layouts. In this case you should use the prefix `partial_`.
+Note that there are cases where these rules will not be possible to apply. For example, when creating layout files that are intended to be part of other layouts. In this case you should use the prefix `layout_`.
 
 #### 1.2.2.3 Menu files
 
-Similar to layout files, menu files should match the name of the component. For example, if we are defining a menu file that is going to be used in the `UserActivity`, then the name of the file should be `activity_user.xml`
-
-A good practice is to not include the word `menu` as part of the name because these files are already located in the `menu` directory.
+MMR2 project use the navigation.xml as menu file
 
 #### 1.2.2.4 Values files
 
