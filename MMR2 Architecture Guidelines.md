@@ -22,8 +22,8 @@ Libraries and tools included:
 
 - JDK 1.8
 - [Android SDK](http://developer.android.com/sdk/index.html).
-- Min : Android 5.0(LOLLIPOP) [(API 21 ](http://developer.android.com/tools/revisions/platforms.html).
-- Max : Android 8.0(Oreo) [(API 27) ](http://developer.android.com/tools/revisions/platforms.html).
+- Min:Android 5.0(LOLLIPOP) [(API 21) ](http://developer.android.com/tools/revisions/platforms.html).
+- Max:Android 8.0(Oreo) [(API 27) ](http://developer.android.com/tools/revisions/platforms.html).
 - Latest Android SDK Tools and build tools.
 
 
