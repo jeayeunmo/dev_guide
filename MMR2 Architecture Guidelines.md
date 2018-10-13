@@ -1,5 +1,5 @@
 
-# Maple MMR2
+# Maple MMR2 Architecture Guidelines
 
 Maple Android app (MMR2) that we use MMR1 output as a reference.
 
