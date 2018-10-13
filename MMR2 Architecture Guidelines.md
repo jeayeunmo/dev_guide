@@ -102,7 +102,7 @@ To ensure that your code is valid and stable use check:
 
 This will run all the code analysis tools and unit tests in the following order:
 
-![Check Diagram](check-task-diagram.png)
+![Check Diagram](https://github.com/mojeayeun/dev_guide/blob/master/check-task-diagram.png)
  
 ## Distribution
 
