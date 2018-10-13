@@ -1,7 +1,7 @@
 
 # Maple MMR2
 
-Maple Android app (MMR2) that we use MMR1 output as a reference for MMR2 Android projects. It demonstrates the architecture, tools and guidelines that we use when developing for the Android platform (https://github.com/ribot/android-guidelines)
+Maple Android app (MMR2) that we use MMR1 output as a reference.
 
 Libraries and tools included:
 
@@ -24,17 +24,20 @@ Libraries and tools included:
 
 - JDK 1.8
 - [Android SDK](http://developer.android.com/sdk/index.html).
-- Android N [(API 24) ](http://developer.android.com/tools/revisions/platforms.html).
+- Min : Android 5.0(LOLLIPOP) [(API 21 ](http://developer.android.com/tools/revisions/platforms.html).
+- Max : Android 8.0(Oreo) [(API 27) ](http://developer.android.com/tools/revisions/platforms.html).
 - Latest Android SDK Tools and build tools.
 
 
 ## Architecture
 
-This project follows ribot's Android architecture guidelines that are based on [MVP (Model View Presenter)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter). Read more about them [here](https://github.com/ribot/android-guidelines/blob/master/architecture_guidelines/android_architecture.md). 
+This project follows MRR1's Android architecture guidelines that are based on [MVVM (Model-View-View Model)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel). Read more about them [Guide to app architecture](https://developer.android.com/jetpack/docs/guide). 
 
 ![](https://github.com/ribot/android-guidelines/raw/master/architecture_guidelines/architecture_diagram.png)
 
-### How to implement a new screen following MVP
+### How to implement a new screen following MVVM
+
+** this part have to be update
 
 Imagine you have to implement a sign in screen. 
 
@@ -99,65 +102,10 @@ To ensure that your code is valid and stable use check:
 
 This will run all the code analysis tools and unit tests in the following order:
 
-![Check Diagram](images/check-task-diagram.png)
+![Check Diagram](check-task-diagram.png)
  
 ## Distribution
 
-The project can be distributed using either [Crashlytics](http://support.crashlytics.com/knowledgebase/articles/388925-beta-distributions-with-gradle) or the [Google Play Store](https://github.com/Triple-T/gradle-play-publisher).
+The project can be distributed based MMR2 policy.
 
-### Play Store
-
-We use the __Gradle Play Publisher__ plugin. Once set up correctly, you will be able to push new builds to
-the Alpha, Beta or production channels like this
-
-```
-./gradlew publishApkRelease
-```
-Read [plugin documentation](https://github.com/Triple-T/gradle-play-publisher) for more info.
-
-### Crashlytics
-
-You can also use Fabric's Crashlytics for distributing beta releases. Remember to add your fabric
-account details to `app/src/fabric.properties`.
-
-To upload a release build to Crashlytics run:
-
-```
-./gradlew assembleRelease crashlyticsUploadDistributionRelease
-```
-
-## New project setup 
-
-To quickly start a new project from this boilerplate follow the next steps:
-
-* Download this [repository as a zip](https://github.com/ribot/android-boilerplate/archive/master.zip).
-* Change the package name. 
-  * Rename packages in main, androidTest and test using Android Studio.
-  * In `app/build.gradle` file, `packageName` and `testInstrumentationRunner`.
-  * In `src/main/AndroidManifest.xml` and `src/debug/AndroidManifest.xml`.
-* Create a new git repository, [see GitHub tutorial](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/).
-* Replace the example code with your app code following the same architecture.
-* In `app/build.gradle` add the signing config to enable release versions.
-* Add Fabric API key and secret to fabric.properties and uncomment Fabric plugin set up in `app/build.gradle`
-* Update `proguard-rules.pro` to keep models (see TODO in file) and add extra rules to file if needed.
-* Update README with information relevant to the new project.
-* Update LICENSE to match the requirements of the new project.
-
-## License
-
-```
-    Copyright 2015 Ribot Ltd.
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-```
 
