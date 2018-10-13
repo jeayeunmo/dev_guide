@@ -22,35 +22,35 @@ Naming conventions for drawables:
 
 | Asset Type   | Prefix            |		Example               |
 |--------------| ------------------|-----------------------------|
-| Action bar   | `ab_`             | `ab_stacked.9.png`          |
-| Button       | `btn_`	            | `btn_send_pressed.9.png`    |
-| Dialog       | `dialog_`         | `dialog_top.9.png`          |
-| Divider      | `divider_`        | `divider_horizontal.9.png`  |
-| Icon         | `ic_`	            | `ic_star.png`               |
-| Menu         | `menu_	`           | `menu_submenu_bg.9.png`     |
-| Notification | `notification_`	| `notification_bg.9.png`     |
-| Tabs         | `tab_`            | `tab_pressed.9.png`         |
+| Action bar   | `ab_`             | `ab_stacked.xml`          |
+| Button       | `btn_`	            | `btn_send_pressed.xml`    |
+| Dialog       | `dialog_`         | `dialog_top.xml`          |
+| Divider      | `divider_`        | `divider_horizontal.xml`  |
+| Icon         | `ic_`	            | `ic_star.xml`               |
+| Menu         | `menu_	`           | `menu_submenu_bg.xml`     |
+| Notification | `notification_`	| `notification_bg.xml`     |
+| Tabs         | `tab_`            | `tab_pressed.xml`         |
 
 Naming conventions for icons (taken from [Android iconography guidelines](http://developer.android.com/design/style/iconography.html)):
 
 | Asset Type                      | Prefix             | Example                      |
 | --------------------------------| ----------------   | ---------------------------- |
-| Icons                           | `ic_`              | `ic_star.png`                |
-| Launcher icons                  | `ic_launcher`      | `ic_launcher_calendar.png`   |
-| Menu icons and Action Bar icons | `ic_menu`          | `ic_menu_archive.png`        |
-| Status bar icons                | `ic_stat_notify`   | `ic_stat_notify_msg.png`     |
-| Tab icons                       | `ic_tab`           | `ic_tab_recent.png`          |
-| Dialog icons                    | `ic_dialog`        | `ic_dialog_info.png`         |
+| Icons                           | `ic_`              | `ic_star.xml`                |
+| Launcher icons                  | `ic_launcher`      | `ic_launcher_calendar.xml`   |
+| Menu icons and Action Bar icons | `ic_menu`          | `ic_menu_archive.xml`        |
+| Status bar icons                | `ic_stat_notify`   | `ic_stat_notify_msg.xml`     |
+| Tab icons                       | `ic_tab`           | `ic_tab_recent.xml`          |
+| Dialog icons                    | `ic_dialog`        | `ic_dialog_info.xml`         |
 
 Naming conventions for selector states:
 
 | State	       | Suffix          | Example                     |
 |--------------|-----------------|-----------------------------|
-| Normal       | `_normal`       | `btn_order_normal.9.png`    |
-| Pressed      | `_pressed`      | `btn_order_pressed.9.png`   |
-| Focused      | `_focused`      | `btn_order_focused.9.png`   |
-| Disabled     | `_disabled`     | `btn_order_disabled.9.png`  |
-| Selected     | `_selected`     | `btn_order_selected.9.png`  |
+| Normal       | `_normal`       | `btn_order_normal.xml`    |
+| Pressed      | `_pressed`      | `btn_order_pressed.xml`   |
+| Focused      | `_focused`      | `btn_order_focused.xml`   |
+| Disabled     | `_disabled`     | `btn_order_disabled.xml`  |
+| Selected     | `_selected`     | `btn_order_selected.xml`  |
 
 
 #### 1.2.2.2 Layout files
