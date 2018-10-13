@@ -6,7 +6,11 @@ Maple Android app (MMR2) that we use MMR1 output as a reference.
 Libraries and tools included:
 
 - Support libraries
-- RecyclerViews and CardViews 
+ : appcompat-v7:27.1.1 , support-v13:27.1.1 , design:27.1.1,constraint-layout:1.1.3 , cardview-v7:27.1.1
+- Places
+ : play-services-places:15.0.1, play-services-maps:15.0.1, android-maps-utils:0.5+
+- Networking
+ : retrofit:2.3.0 , converter-gson: , okhttp3:logging-interceptor:3.10.0 , gson:2.8.4
 - [RxJava](https://github.com/ReactiveX/RxJava) and [RxAndroid](https://github.com/ReactiveX/RxAndroid) 
 - [Retrofit 2](http://square.github.io/retrofit/)
 - [Dagger 2](http://google.github.io/dagger/)
