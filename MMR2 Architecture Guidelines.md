@@ -35,7 +35,12 @@ This project follows MRR1's Android architecture guidelines that are based on [M
 
 ### How to implement a new screen following MVVM
 
-** this part have to be update
+Imagine you have to implement a nutirition's home in screen. 
+
+1. Create a new package under `maple/ui/modules/` called `nutirition`
+2. Create a new sub packages under `nutirition` called `views, viemodels`
+    you can create more sub packages user `nutirition` called `models,interfaces,bindingmodels,adapter`
+    In case of Fragment, it is located under  `views/fragment`
 
 Imagine you have to implement a sign in screen. 
 
