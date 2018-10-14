@@ -35,24 +35,33 @@ This project follows MRR1's Android architecture guidelines that are based on [M
 
 ### How to implement a new screen following MVVM
 
-Imagine you have to implement a nutirition's home in screen. 
+Imagine you have to implement a nutirition's some screen. 
 
 1. Create a new package under `maple/ui/modules/` called `nutirition`
 2. Create a new sub packages under `nutirition` 
+
 | package           | description        | Example                      |
 | ------------------| ----------------   | ---------------------------- |
 | nutirition        | pillar             |                              |
-|  - views          | `ic_launcher`      | `ic_launcher_calendar.xml`   |
-|    - fragments    | `ic_menu`          | `ic_menu_archive.xml`        |
-|  - viewmodels     | `ic_stat_notify`   | `ic_stat_notify_msg.xml`     |
-|  - models         | `ic_tab`           | `ic_tab_recent.xml`          |
-|  - interfaces     | `ic_dialog`        | `ic_dialog_info.xml`         |
-|  - bindingmodels  | `ic_dialog`        | `ic_dialog_info.xml`         |
-|  - adapter        | `ic_dialog`        | `ic_dialog_info.xml`         |
+|  - views          | activity           | `QuickRefillActivity`        |
+|  -- fragments     | fragment           | `HistoryFragment`            |
+|  - viewmodels     | viewmodel          | `PrescriptionsViewModel`     |
+|  - models         | model              | `PrescriptionStatusCodes`    |
+|  - interfaces     | interface          | `TransferStepValidation`     |
+|  - bindingmodels  | bindingmodel        | `AddPharmacyBindingModel`   |
+|  - adapter        | RecyclerViewAdapter | `HistoryAdapter`            |
+
+3. Create an new screen for Activity or Fragment called `activity_xyz`,`fragment_xyz`. as a result binding file is generated
+automatically `activityXyzBiding`.
+4. Create an new ViewModel for Activity or Fragment called `XyzViewModel`. 
+5. Create an new Activity called `XyzActivity`. You could also use a Fragment.
+
+-- 원래는 이부분을 다양하게 종류별로 만들면 좋을텐데.. 일단 액티비에만 치우치게 작성하고
+나중에 나머지는 추가한다.
 
 
-you can create more sub packages user `nutirition` called `models,interfaces,bindingmodels,adapter`.
-In case of Fragment, it is located under  `views/fragment`.
+3. Create an new Activity called `XyzActivity`. You could also use a Fragment.
+4. Define the view interface that your Activity is going to implement. Create a new interface called `SignInMvpView` that extends `MvpView`. Add the methods that you think will be necessary, e.g. `showSignInSuccessful()`
 
 Imagine you have to implement a sign in screen. 
 
