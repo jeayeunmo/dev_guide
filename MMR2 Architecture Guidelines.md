@@ -38,7 +38,19 @@ This project follows MRR1's Android architecture guidelines that are based on [M
 Imagine you have to implement a nutirition's home in screen. 
 
 1. Create a new package under `maple/ui/modules/` called `nutirition`
-2. Create a new sub packages under `nutirition` called `views, viemodels`.
+2. Create a new sub packages under `nutirition` 
+| package           | description        | Example                      |
+| ------------------| ----------------   | ---------------------------- |
+| nutirition        | pillar             |                              |
+|  - views          | `ic_launcher`      | `ic_launcher_calendar.xml`   |
+|    - fragments    | `ic_menu`          | `ic_menu_archive.xml`        |
+|  - viewmodels     | `ic_stat_notify`   | `ic_stat_notify_msg.xml`     |
+|  - models         | `ic_tab`           | `ic_tab_recent.xml`          |
+|  - interfaces     | `ic_dialog`        | `ic_dialog_info.xml`         |
+|  - bindingmodels  | `ic_dialog`        | `ic_dialog_info.xml`         |
+|  - adapter        | `ic_dialog`        | `ic_dialog_info.xml`         |
+
+
 you can create more sub packages user `nutirition` called `models,interfaces,bindingmodels,adapter`.
 In case of Fragment, it is located under  `views/fragment`.
 
