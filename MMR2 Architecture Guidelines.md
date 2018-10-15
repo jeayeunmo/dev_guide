@@ -148,11 +148,11 @@ public class XyzActivity extends BaseActivity<ActivityXyzBiding, XyzViewModel> {
 
 
 ```
-6. Create an new Java Class called `XyzRepository`. You should add this to Dagger.
+6. Create an new Java Class called `NutritionRepository`. You should add this to Dagger.
 
 ```java
 
-public class XyzRepository extends BaseRepository {
+public class NutritionRepository extends BaseRepository {
 
     private final MediatorLiveData<Resource<XyzDataModel>> mXyzResponse = new MediatorLiveData<>();
     private Observer<ApiResponse<XyzDataModel>> mXyzResponseObserver;
@@ -172,41 +172,83 @@ public class XyzRepository extends BaseRepository {
         return mXyzResponse;
     }
 
+    //if there are parameters..
+    //public void getLoadData(..param1,..param2,...) {
+    //esle no paramters
+    public void getLoadData() {
 
-    public void getLoadData(..param1,..param2,) {
-
-        .. set parameter
+        //.. set parameter
         XyzPayload payload = new XyzPayload();
         payload.param1 = param1;
         payload.param2 = param2;
         
-        genericCall(mXyzResponse, mApi.getXyzService().getlist(payload),mXyzResponseObserver);
+        genericCall(mXyzResponse, mApi.getNutritionService().getData(payload),mXyzResponseObserver);
     }
+```
 
+7. Add an new Interface Class called `NutritionService`
+```java
 
+public interface NutritionService {
 
+    ...
+
+    @GET("xxx/yyyy")
+    LiveData<ApiResponse<XyzDataModel>> getData();
+
+    ...
+}
+    
 ```
 
 
+8. Update method called `getNutritionService()` at ApiController(../data/sources/remote/rest).
+
+```java
+
+public class ApiController {
+    ...
+    //add
+    private NutritionService mNutritionService;
+    ...
+    //update mBaseUrlNutrition
+    private String mBaseUrlMaple, mBaseUrlMedeo, mBaseUrlOkta, mBaseUrlNutrition;
+    ...
+    
+    //update String nutritionBaseUrl
+    public void init(final Context context, String mapleBaseUrl, String medeoBaseUrl, String oktaBaseUrl, 
+String nutritionBaseUrl, String environment) {
+    
+    ...
+    //add
+    mBaseUrlNutrition = nutritionBaseUrl;
+    ...
+    
+    //add
+    mNutritionService = buildService(mBaseUrlNutrition).create(NutritionService.class);
+    
+    }
+    
+    //add
+    public NutritionService getNutritionService() {
+        return mNutritionService;
+    }
+    
+```
+
+9. Add method called `provideNutritionRepository()` at RepositoriesModule(../data/di/module).
+
+```java
+
+   @Singleton
+   @Provides
+   public NutritionRepository provideNutritionRepository(){
+      return new NutritionRepository();
+   }
+   
+```
 
 
--- 원래는 이부분을 다양하게 종류별로 만들면 좋을텐데.. 일단 액티비에만 치우치게 작성하고
-나중에 나머지는 추가한다.
-
-
-3. Create an new Activity called `XyzActivity`. You could also use a Fragment.
-4. Define the view interface that your Activity is going to implement. Create a new interface called `SignInMvpView` that extends `MvpView`. Add the methods that you think will be necessary, e.g. `showSignInSuccessful()`
-
-Imagine you have to implement a sign in screen. 
-
-1. Create a new package under `ui` called `signin`
-2. Create an new Activity called `ActivitySignIn`. You could also use a Fragment.
-3. Define the view interface that your Activity is going to implement. Create a new interface called `SignInMvpView` that extends `MvpView`. Add the methods that you think will be necessary, e.g. `showSignInSuccessful()`
-4. Create a `SignInPresenter` class that extends `BasePresenter<SignInMvpView>`
-5. Implement the methods in `SignInPresenter` that your Activity requires to perform the necessary actions, e.g. `signIn(String email)`. Once the sign in action finishes you should call `getMvpView().showSignInSuccessful()`.
-6. Create a `SignInPresenterTest`and write unit tests for `signIn(email)`. Remember to mock the  `SignInMvpView` and also the `DataManager`.
-7. Make your  `ActivitySignIn` implement `SignInMvpView` and implement the required methods like `showSignInSuccessful()`
-8. In your activity, inject a new instance of `SignInPresenter` and call `presenter.attachView(this)` from `onCreate` and `presenter.detachView()` from `onDestroy()`. Also, set up a click listener in your button that calls `presenter.signIn(email)`.
 
 ## Code Quality
 
