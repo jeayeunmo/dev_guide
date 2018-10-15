@@ -1,7 +1,7 @@
 
 # Maple MMR2 Architecture Guidelines
 
-Maple Android app (MMR2) that we use MMR1 output as a reference.
+Maple (MMR2) uses MMR1 output as a reference.
 
 Libraries and tools included:
 
