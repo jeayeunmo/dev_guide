@@ -31,7 +31,7 @@ Libraries and tools included:
 
 This project follows MRR1's Android architecture guidelines that are based on [MVVM (Model-View-View Model)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel). Read more about them [Guide to app architecture](https://developer.android.com/jetpack/docs/guide). 
 
-![](https://github.com/ribot/android-guidelines/raw/master/architecture_guidelines/architecture_diagram.png)
+![](./maple_mvvm_aproach_neethu.PNG)
 
 ### How to implement a new screen following MVVM
 
