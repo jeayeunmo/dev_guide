@@ -55,6 +55,8 @@ Imagine you have to implement a nutirition's some screen.
 automatically `activityXyzBiding`.
 
 ```xml
+//screen file: activity_xyz.xml
+
 //define variable
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -80,6 +82,7 @@ automatically `activityXyzBiding`.
 4. Create an new ViewModel for Activity or Fragment called `XyzViewModel`. 
  
 ```java
+
 //define variable
 private final LiveData<Resource<XyzDataModel>> mXyz;
 
@@ -104,6 +107,46 @@ public void loadData() {
 ```
 
 5. Create an new Activity called `XyzActivity`. You could also use a Fragment.
+
+```java
+
+    //view models
+    private XyzViewModel mXyzViewModel;
+
+    //onCreate
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ....
+
+        //LiveData observe 
+        mXyzViewModel.observeXyz().observe(this, xyzDataModel ->{
+           // do something..
+
+        });
+    }
+
+    @Override
+    public int getBindingVariable() {
+        return BR.xyzViewModel;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_xyz;
+    }
+
+    @Override
+    public XyzViewModel getViewModel() {
+        mXyzViewModel = ViewModelProviders.of(this).get(XyzViewModel.class);
+        return mXyzViewModel;
+    }
+
+
+
+```
+6. Create an new Activity called `XyzActivity`. You could also use a Fragment.
 
 -- 원래는 이부분을 다양하게 종류별로 만들면 좋을텐데.. 일단 액티비에만 치우치게 작성하고
 나중에 나머지는 추가한다.
