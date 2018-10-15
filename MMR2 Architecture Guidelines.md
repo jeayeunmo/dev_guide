@@ -53,6 +53,30 @@ Imagine you have to implement a nutirition's some screen.
 
 3. Create an new screen for Activity or Fragment called `activity_xyz`,`fragment_xyz`. as a result binding file is generated
 automatically `activityXyzBiding`.
+
+```xml
+//define variable
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="xyzViewModel"
+            type="ca.shoppersdrugmart.maple.ui.modules.nutirition.viewmodels.XyzViewModel"/>
+    </data>
+ 
+ ...
+ 
+ <include
+    android:id="@+id/xyz_cta"
+    layout="@layout/view_generic_button"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/default_button_height"
+    android:layout_marginTop="@dimen/margin_xlarge"
+    app:click='@{(v) -> xyzViewModel.loadData()}'
+  ....   
+          
+```
+
 4. Create an new ViewModel for Activity or Fragment called `XyzViewModel`. 
  
 ```java
