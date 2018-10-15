@@ -304,8 +304,6 @@ This will run all the code analysis tools and unit tests in the following order:
 
 ![Check Diagram](https://github.com/mojeayeun/dev_guide/blob/master/check-task-diagram.png)
  
-## Distribution
 
-The project can be distributed based MMR2 policy.
 
 
