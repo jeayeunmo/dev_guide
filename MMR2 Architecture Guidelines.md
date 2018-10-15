@@ -54,6 +54,31 @@ Imagine you have to implement a nutirition's some screen.
 3. Create an new screen for Activity or Fragment called `activity_xyz`,`fragment_xyz`. as a result binding file is generated
 automatically `activityXyzBiding`.
 4. Create an new ViewModel for Activity or Fragment called `XyzViewModel`. 
+ 
+```java
+//define variable
+private final LiveData<Resource<XyzDataModel>> mXyz;
+
+//define observemethod for activity
+public LiveData<Resource<XyzDataModel>> observeXyz() {
+        return mXyz;
+}
+
+//add Transformations.map to  in constructor
+public XyzViewModel() {
+        mXyz = Transformations.map(mXyzRepo.observeXyzData(), xyz -> {
+            mLoading.set(xyz.status == Status.LOADING);
+            return xyz;
+        });
+}
+
+//define method to call Repo
+public void loadData() {
+        mXyzRepo.getLoadData();
+}
+
+```
+
 5. Create an new Activity called `XyzActivity`. You could also use a Fragment.
 
 -- 원래는 이부분을 다양하게 종류별로 만들면 좋을텐데.. 일단 액티비에만 치우치게 작성하고
