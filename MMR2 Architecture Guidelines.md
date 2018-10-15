@@ -52,7 +52,7 @@ Imagine you have to implement a nutirition's some screen.
 |  - adapter        | RecyclerViewAdapter | `HistoryAdapter`            |
 
 3. Create an new screen for Activity or Fragment called `activity_xyz`,`fragment_xyz`. as a result binding file is generated
-automatically `activityXyzBiding`.
+automatically `ActivityXyzBiding`.
 
 ```xml
 //screen file: activity_xyz.xml
@@ -83,32 +83,34 @@ automatically `activityXyzBiding`.
  
 ```java
 
-//define variable
-private final LiveData<Resource<XyzDataModel>> mXyz;
+    //define variable
+    private final LiveData<Resource<XyzDataModel>> mXyz;
 
-//define observemethod for activity
-public LiveData<Resource<XyzDataModel>> observeXyz() {
-        return mXyz;
-}
+    //define observemethod for activity
+    public LiveData<Resource<XyzDataModel>> observeXyz() {
+            return mXyz;
+    }
 
-//add Transformations.map to  in constructor
-public XyzViewModel() {
-        mXyz = Transformations.map(mXyzRepo.observeXyzData(), xyz -> {
-            mLoading.set(xyz.status == Status.LOADING);
-            return xyz;
-        });
-}
+    //add Transformations.map to  in constructor
+    public XyzViewModel() {
+            mXyz = Transformations.map(mXyzRepo.observeXyzData(), xyz -> {
+                mLoading.set(xyz.status == Status.LOADING);
+                return xyz;
+            });
+    }
 
-//define method to call Repo
-public void loadData() {
-        mXyzRepo.getLoadData();
-}
+    //define method to call Repo
+    public void loadData() {
+            mXyzRepo.getLoadData();
+    }
 
 ```
 
 5. Create an new Activity called `XyzActivity`. You could also use a Fragment.
 
 ```java
+
+public class XyzActivity extends BaseActivity<ActivityXyzBiding, XyzViewModel> {
 
     //view models
     private XyzViewModel mXyzViewModel;
@@ -146,7 +148,47 @@ public void loadData() {
 
 
 ```
-6. Create an new Activity called `XyzActivity`. You could also use a Fragment.
+6. Create an new Java Class called `XyzRepository`. You should add this to Dagger.
+
+```java
+
+public class XyzRepository extends BaseRepository {
+
+    private final MediatorLiveData<Resource<XyzDataModel>> mXyzResponse = new MediatorLiveData<>();
+    private Observer<ApiResponse<XyzDataModel>> mXyzResponseObserver;
+
+    private XyzDataModel mXyzDataModel = new XyzDataModel();
+
+    public XyzRepository getXyzDataModel() {
+        return mXyzDataModel;
+    }
+
+    public LiveData<Resource<XyzDataModel>> observeXyzData() {
+        mXyzResponseObserver = xyzDataGenericModel -> {
+            if (xyzDataGenericModel == null) return;
+            mXyzDataModel = xyzDataGenericModel.body;
+        };
+
+        return mXyzResponse;
+    }
+
+
+    public void getLoadData(..param1,..param2,) {
+
+        .. set parameter
+        XyzPayload payload = new XyzPayload();
+        payload.param1 = param1;
+        payload.param2 = param2;
+        
+        genericCall(mXyzResponse, mApi.getXyzService().getlist(payload),mXyzResponseObserver);
+    }
+
+
+
+```
+
+
+
 
 -- 원래는 이부분을 다양하게 종류별로 만들면 좋을텐데.. 일단 액티비에만 치우치게 작성하고
 나중에 나머지는 추가한다.
