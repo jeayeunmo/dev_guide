@@ -35,7 +35,7 @@ This project follows MRR1's Android architecture guidelines that are based on [M
 
 ### How to define the responsibilities of MVVM
 
- It is based on "Separation of concerns , Better testablility, Follow SOLID principles' .
+ It is based on "Separation of concerns , Better testable, Follow SOLID principles' .
 
 | MODEL Responsibilities |
 | ------------------| 
