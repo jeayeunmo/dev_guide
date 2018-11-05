@@ -33,6 +33,35 @@ This project follows MRR1's Android architecture guidelines that are based on [M
 
 ![](./maple_mvvm_aproach_neethu.PNG)
 
+### How to define the responsibilities of MVVM
+
+| MODEL Responsibilities |
+| ------------------| 
+| Retrofit         |
+| Shared Preferences   | 
+
+| VIEW(UI) Responsibilities |
+| ------------------| 
+| Working with android.view, android.widget, etc. |
+| Showing Dialogs, Toasts, Snackbars   | 
+| Event listeners*   | 
+| Starting Activities*   | 
+| Handling Menu   | 
+| Handling permisstions   | 
+| Other Android specific stuff & methods which require reference to the Activity Context | 
+
+| VIEWMODEL Responsibilities |
+| ------------------| 
+| Exposing state(progress, offline, empty, error,etc.)        |
+| Exposing data*   | 
+| Handling visibility   | 
+| Handling Extras & Arguments(Bundle)   | 
+| Input validation   | 
+| Executing data calls in the Model   | 
+| Executing UI commands in the View*   | 
+
+* it is changeable in this project
+
 ### How to implement a new screen following MVVM
 
 Imagine you have to implement a nutirition's some screen. 
