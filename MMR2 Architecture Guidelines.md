@@ -60,7 +60,7 @@ This project follows MRR1's Android architecture guidelines that are based on [M
 | Executing data calls in the Model   | 
 | Executing UI commands in the View*   | 
 
-* it is changeable in this project
+'*' it is changeable in this project
 
 ### How to implement a new screen following MVVM
 
