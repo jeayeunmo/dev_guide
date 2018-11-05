@@ -35,7 +35,7 @@ This project follows MRR1's Android architecture guidelines that are based on [M
 
 ### How to define the responsibilities of MVVM
 
- It is based on "Separation of concerns , Better testablility, Floow SOLID principles' 
+ It is based on "Separation of concerns , Better testablility, Follow SOLID principles' .
 
 | MODEL Responsibilities |
 | ------------------| 
@@ -52,8 +52,8 @@ This project follows MRR1's Android architecture guidelines that are based on [M
 | Handling Menu   | 
 | Handling permisstions   | 
 | Other Android specific stuff & methods which require reference to the Activity Context | 
-* Event Listeners is defined in the view
-* ViewModel should use only the Application Context (start service , send broadcast, load resource values)
+* Event Listeners is defined in the view.
+
 
 | VIEWMODEL Responsibilities |
 | ------------------| 
@@ -64,10 +64,10 @@ This project follows MRR1's Android architecture guidelines that are based on [M
 | Input validation   | 
 | Executing data calls in the Model   | 
 | Executing UI commands in the View*   | 
-* ViewModel layer should be separated from Android specific classes
-* ViewModel should use only the Application Context (start service , send broadcast, load resource values)
+* ViewModel layer should be separated from Android specific classes.
+* ViewModel should use only the Application Context (start service , send broadcast, load resource values).
 
-'*' it is changeable in this project
+'*' it is changeable in this project.
 p.s) reference : https://speakerdeck.com/petrnohejl/mvvm-architecture-on-android
 
 ### How to implement a new screen following MVVM
