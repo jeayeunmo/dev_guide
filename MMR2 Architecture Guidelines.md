@@ -68,7 +68,9 @@ This project follows MRR1's Android architecture guidelines that are based on [M
 * ViewModel should use only the Application Context (start service , send broadcast, load resource values).
 
 '*' it is changeable in this project.
+
 p.s) reference : https://speakerdeck.com/petrnohejl/mvvm-architecture-on-android
+
 
 ### How to implement a new screen following MVVM
 
@@ -285,6 +287,8 @@ String nutritionBaseUrl, String environment) {
    
 ```
 
+10. Call & Event Flow.
+![](./CallandEventFlow.PNG)
 
 
 ## Code Quality
