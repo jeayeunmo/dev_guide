@@ -1,24 +1,84 @@
 
-# Maple MMR2 Architecture Guidelines
+# Maple MMR2 Unit Test Guidelines
 
-Maple (MMR2) uses MMR1 output as a reference.
+Maple (MMR2) uses "Structure-Based Testing Techniques-Modified Condition Decision Condition (MCDC) Testing" based on ISO/IEC/IEEE 29119 Software Testing.
 
-Libraries and tools included:
+Reference Site:
+- [ISO/IEC/IEEE 29119 Software Testing](http://softwaretestingstandard.org/)
+- [ISO/IEC/IEEE 29119-wikipedia](https://en.wikipedia.org/wiki/ISO/IEC_29119)
+- [ISTQB® (International Software Testing Qualifications Board)](https://www.istqb.org)
 
-- Support libraries
-- [Architecture Components](https://developer.android.com/topic/libraries/architecture/)
-- [Retrofit 2](http://square.github.io/retrofit/)
-- [Dagger 2](http://google.github.io/dagger/)
-- [Picasso](http://square.github.io/picasso/)
-- [Hockey](https://hockeyapp.net/)
-- [Glide](https://github.com/bumptech/glide)
+Test Techniques
+- [Modified condition/decision coverage-wikipedia](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)
+- [ISO/IEC/IEEE 29119-4: Test Techniques](http://softwaretestingstandard.org/part4.php)
 
-- Functional tests with [Espresso](https://google.github.io/android-testing-support-library/docs/espresso/index.html)
-- [Robolectric](http://robolectric.org/)
-- [Mockito](http://mockito.org/)
-- [Checkstyle](http://checkstyle.sourceforge.net/), [PMD](https://pmd.github.io/) and [Findbugs](http://findbugs.sourceforge.net/) for code analysis
+The Foundation Level Syllabus 2018
+- [ISO/IEC/IEEE 29119-4: Test Techniques](https://www.istqb.org/downloads/send/51-ctfl2018/208-ctfl-2018-syllabus.html)
 
-## Requirements
+## 1. Objectives of Component(Unit) testing
+Component testing (also known as unit or module testing) focuses on components that are separately
+testable. Objectives of component testing include:
+- Reducing risk
+- Verifying whether the functional and non-functional behaviors of the component are as designed
+and specified
+- Building confidence in the component’s quality
+- Finding defects in the component
+- Preventing defects from escaping to higher test levels 
+
+### 1.1 Test basis
+Examples of work products that can be used as a test basis for component testing include:
+- Detailed design
+- Code
+- Data model
+- Component specifications
+
+### 1.2 Test objects
+Typical test objects for component testing include:
+- Components, units or modules
+- Code and data structures
+- Classes
+- Database modules
+
+### 1.3 Typical defects and failures
+Examples of typical defects and failures for component testing include:
+- Incorrect functionality (e.g., not as described in design specifications)
+- Data flow problems
+- Incorrect code and logic 
+
+### 1.4 Specific approaches and responsibilities
+Component testing is usually performed by the developer who wrote the code, but it at least requires
+access to the code being tested. Developers may alternate component development with finding and
+fixing defects. Developers will often write and execute tests after having written the code for a component.
+
+
+## 2. Test Design Techniques (White-box Test Techniques)
+White-box testing is based on the internal structure of the test object.
+
+### 2.1 Statement Testing and Coverage
+Statement testing exercises the executable statements in the code. Coverage is measured as the number
+of statements executed by the tests divided by the total number of executable statements in the test
+object, normally expressed as a percentage.
+
+### 2.2 Decision Testing and Coverage
+Decision testing exercises the decisions in the code and tests the code that is executed based on the
+decision outcomes. To do this, the test cases follow the control flows that occur from a decision point
+(e.g., for an IF statement, one for the true outcome and one for the false outcome; for a CASE statement,
+test cases would be required for all the possible outcomes, including the default outcome).
+Coverage is measured as the number of decision outcomes executed by the tests divided by the total
+number of decision outcomes in the test object, normally expressed as a percentage.
+
+### 2.3 The Value of Statement and Decision Testing
+When 100% statement coverage is achieved, it ensures that all executable statements in the code have
+been tested at least once, but it does not ensure that all decision logic has been tested. Of the two whitebox
+techniques discussed in here, statement testing may provide less coverage than decision
+testing.
+When 100% decision coverage is achieved, it executes all decision outcomes, which includes testing the
+true outcome and also the false outcome, even when there is no explicit false statement (e.g., in the case
+of an IF statement without an else in the code). Statement coverage helps to find defects in code that was
+not exercised by other tests. Decision coverage helps to find defects in code where other tests have not
+taken both true and false outcomes.
+Achieving 100% decision coverage guarantees 100% statement coverage (but not vice versa). 
+
 
 - JDK 1.8
 - [Android SDK](http://developer.android.com/sdk/index.html).
@@ -27,7 +87,8 @@ Libraries and tools included:
 - Latest Android SDK Tools and build tools.
 
 
-## Architecture
+## Why MCDC in Maple MMR2 
+We can cover XXX coverage
 
 This project follows MRR1's Android architecture guidelines that are based on [MVVM (Model-View-View Model)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel). Read more about them [Guide to app architecture](https://developer.android.com/jetpack/docs/guide). 
 
