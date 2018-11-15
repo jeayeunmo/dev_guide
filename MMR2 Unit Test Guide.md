@@ -1,7 +1,7 @@
 
 # Maple MMR2 Unit Test Guidelines
 
-Maple (MMR2) uses "Structure-Based Testing Techniques-Modified Condition Decision Condition (MCDC) Testing" based on ISO/IEC/IEEE 29119 Software Testing.
+Maple (MMR2) uses "Structure-Based Testing Techniques-Modified Condition Decision Condition (MC/DC) Testing" based on ISO/IEC/IEEE 29119 Software Testing.
 
 Reference Site:
 - [ISO/IEC/IEEE 29119 Software Testing](http://softwaretestingstandard.org/)
@@ -11,9 +11,7 @@ Reference Site:
 Test Techniques
 - [Modified condition/decision coverage-wikipedia](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)
 - [ISO/IEC/IEEE 29119-4: Test Techniques](http://softwaretestingstandard.org/part4.php)
-
-The Foundation Level Syllabus 2018
-- [ISO/IEC/IEEE 29119-4: Test Techniques](https://www.istqb.org/downloads/send/51-ctfl2018/208-ctfl-2018-syllabus.html)
+- [The Foundation Level Syllabus 2018 of ISTQB](https://www.istqb.org/downloads/send/51-ctfl2018/208-ctfl-2018-syllabus.html)
 
 ## 1. Objectives of Component(Unit) testing
 Component testing (also known as unit or module testing) focuses on components that are separately
@@ -87,8 +85,9 @@ Achieving 100% decision coverage guarantees 100% statement coverage (but not vic
 - Latest Android SDK Tools and build tools.
 
 
-## Why MCDC in Maple MMR2 
+## Why MC/DC in Maple MMR2 
 We can cover XXX coverage
+![](./coverage_relationship.PNG)
 
 This project follows MRR1's Android architecture guidelines that are based on [MVVM (Model-View-View Model)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel). Read more about them [Guide to app architecture](https://developer.android.com/jetpack/docs/guide). 
 
