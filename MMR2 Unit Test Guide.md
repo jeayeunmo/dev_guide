@@ -109,7 +109,7 @@ There is another approach to archive the "Elementary Comparion Test" [Elementary
 
 ## 4. Test Case & sample 
 ### 4.1 Input Field Validation Check case
-Login case, we can use Multiple condition coverage.
+Sign-up case, we can use Multiple condition coverage.
 ![](./signup-mcc.PNG)
 
 
