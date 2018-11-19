@@ -12,6 +12,7 @@ Test Techniques
 - [Modified condition/decision coverage-wikipedia](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)
 - [ISO/IEC/IEEE 29119-4: Test Techniques](http://softwaretestingstandard.org/part4.php)
 - [The Foundation Level Syllabus 2018 of ISTQB](https://www.istqb.org/downloads/send/51-ctfl2018/208-ctfl-2018-syllabus.html)
+- [Elementary Comparion Test](http://www.tmap.net/wiki/elementary-comparison-test-ect)
 
 ## 1. Objectives of Component(Unit) testing
 Component testing (also known as unit or module testing) focuses on components that are separately
@@ -77,13 +78,38 @@ not exercised by other tests. Decision coverage helps to find defects in code wh
 taken both true and false outcomes.
 Achieving 100% decision coverage guarantees 100% statement coverage (but not vice versa). 
 
+### 2.4 MC/DC coverage [Modified condition/decision coverage in wiki](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)
+Every point of entry and exit in the program has been invoked at least once, every condition in a decision in the program has taken all possible outcomes at least once, and each condition has been shown to affect that decision outcome independently. A condition is shown to affect a decision's outcome independently by varying just that condition while holding fixed all other possible conditions. The condition/decision criterion does not guarantee the coverage of all conditions in the module because in many test cases, some conditions of a decision are masked by the other conditions. Using the modified condition/decision criterion, each condition must be shown to be able to act on the decision outcome by itself, everything else being held fixed. The MC/DC criterion is thus much stronger than the condition/decision coverage.
+
 ### 2.4 Why MC/DC in Maple MMR2 
 Mutiple condition coverage is ideally best, but it may make so many test case, so we select the next strong coverage level of it.
-Usually,
+But If it is very important function (ex. sign-in, sign-up, etc) then it is recommneded the Mutiple condition coverage.
 ![](./coverage_relationship.PNG)
 
-## 3. How to define the Test Case
+## 3. How to define the Test Case 
+Mutiple condition coverage is ideally best, but it may make so many test case, so we select the next strong coverage level of it.
+Maple (MMR2) uses "Elementary Comparion Test" based on MC/DC.
 
+### 3.1 Idenfity the decision points 
+### 3.2 Idenfity the control flow 
+### 3.3 Determine test situations per decision point, using MC/DC 
+### 3.4 Create Logical Test Cases 
+### 3.5 Create Physical Test Cases 
+### 3.6 Create Test Script 
+
+
+## 4. Test Case & sample 
+### 4.1 Input Field Validation Check case
+- 다중조건 커버리지 내용 참고 (169)
+
+### 4.2 CRUD case
+### 4.2.1 Read data case
+comming soon.
+### 4.2.2 Create/Udate/Delete data case
+comming soon.
+
+## 5. Backup 
+------------------------------ end --------------------
 ### 3.1 Input Field Validation Check case
 - 다중조건 커버리지 내용 참고 (169)
 
@@ -139,3 +165,6 @@ Junit 에서 어떤것을 지원하는지를 잘 보고 판단해야 한다.
 https://brunch.co.kr/@oemilk/76
 
 
+#### 다음 5 
+https://myinbox.tistory.com/26
+나름 잘 설명되어 있음.. 테스트 케이스를 뽑는 방식
