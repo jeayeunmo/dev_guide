@@ -78,7 +78,7 @@ not exercised by other tests. Decision coverage helps to find defects in code wh
 taken both true and false outcomes.
 Achieving 100% decision coverage guarantees 100% statement coverage (but not vice versa). 
 
-### 2.4 MC/DC coverage [Modified condition/decision coverage in wiki](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)
+### 2.4 MC/DC coverage  [Modified condition/decision coverage in wiki](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)
 Every point of entry and exit in the program has been invoked at least once, every condition in a decision in the program has taken all possible outcomes at least once, and each condition has been shown to affect that decision outcome independently. A condition is shown to affect a decision's outcome independently by varying just that condition while holding fixed all other possible conditions. The condition/decision criterion does not guarantee the coverage of all conditions in the module because in many test cases, some conditions of a decision are masked by the other conditions. Using the modified condition/decision criterion, each condition must be shown to be able to act on the decision outcome by itself, everything else being held fixed. The MC/DC criterion is thus much stronger than the condition/decision coverage.
 
 ### 2.4 Why MC/DC in Maple MMR2 
@@ -90,13 +90,17 @@ But If it is very important function (ex. sign-in, sign-up, etc) then it is reco
 Mutiple condition coverage is ideally best, but it may make so many test case, so we select the next strong coverage level of it.
 Maple (MMR2) uses "Elementary Comparion Test" based on MC/DC.
 
-### 3.1 Idenfity the decision points 
-### 3.2 Idenfity the control flow 
-### 3.3 Determine test situations per decision point, using MC/DC 
-### 3.4 Create Logical Test Cases 
-### 3.5 Create Physical Test Cases 
-### 3.6 Create Test Script 
+### 3.1 Idenfity the decision points
+![](./3.1-new.PNG)
+### 3.2 Determine test situations per decision point, using MC/DC 
+![](./3.2-new.PNG)
+### 3.3 Find the Path (it is Test case)
+![](./3.3-new.PNG)
+### 3.5 Create Test Script  
+![](./3.4.PNG)
 
+### 3.7 etc 
+There is another approach to archive the "Elementary Comparion Test" [Elementary Comparion Test of TestExpo](https://www.capgemini.dk/globalassets/denmark/testexpo/prasentationer/2015-prasentationer/testexpo15_rik-marselis_sogeti-group.pdf)
 
 ## 4. Test Case & sample 
 ### 4.1 Input Field Validation Check case
