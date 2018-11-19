@@ -2,7 +2,10 @@
 # Maple MMR2 Unit Test Guidelines 
 
 Maple (MMR2) uses "Structure-Based Testing Techniques-Modified Condition Decision Condition (MC/DC) Testing" based on ISO/IEC/IEEE 29119 Software Testing.
-But, it is one of guidelines, choose smart!!, based on the real problem you are facing, and save time by knowing what other coverage(s) you achieve as well. Do effective and efficient testing with a minimum of effort!!
+
+But, it is one of guidelines, choose smart!!, based on the real problem you are facing, and save time by knowing what other coverage(s) you achieve as well. 
+
+Do effective and efficient testing with a minimum of effort!!
 
 
 Reference Site:
