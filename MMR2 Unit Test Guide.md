@@ -1,7 +1,9 @@
 
-# Maple MMR2 Unit Test Guidelines
+# Maple MMR2 Unit Test Guidelines 
 
 Maple (MMR2) uses "Structure-Based Testing Techniques-Modified Condition Decision Condition (MC/DC) Testing" based on ISO/IEC/IEEE 29119 Software Testing.
+But, it is one of guidelines, choose smart!!, based on the real problem you are facing, and save time by knowing what other coverage(s) you achieve as well. Do effective and efficient testing with a minimum of effort!!
+
 
 Reference Site:
 - [ISO/IEC/IEEE 29119 Software Testing](http://softwaretestingstandard.org/)
@@ -97,20 +99,24 @@ Maple (MMR2) uses "Elementary Comparion Test" based on MC/DC.
 ### 3.3 Find the Path (it is Test case)
 ![](./3.3-new.PNG)
 ### 3.5 Create Test Script  
-![](./3.4.PNG)
+![](./3.4-new.PNG)
 
 ### 3.7 etc 
 There is another approach to archive the "Elementary Comparion Test" [Elementary Comparion Test of TestExpo](https://www.capgemini.dk/globalassets/denmark/testexpo/prasentationer/2015-prasentationer/testexpo15_rik-marselis_sogeti-group.pdf)
 
 ## 4. Test Case & sample 
 ### 4.1 Input Field Validation Check case
-- 다중조건 커버리지 내용 참고 (169)
+Login case, we can use Multiple condition coverage.
+![](./signup-mcc.PNG)
+
 
 ### 4.2 CRUD case
 ### 4.2.1 Read data case
 comming soon.
 ### 4.2.2 Create/Udate/Delete data case
 comming soon.
+
+
 
 ## 5. Backup 
 ------------------------------ end --------------------
