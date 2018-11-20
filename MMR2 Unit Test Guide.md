@@ -73,7 +73,7 @@ number of decision outcomes in the test object, normally expressed as a percenta
 
 ### 2.3 The Value of Statement and Decision Testing
 When 100% statement coverage is achieved, it ensures that all executable statements in the code have
-been tested at least once, but it does not ensure that all decision logic has been tested. Of the two whitebox
+been tested at least once, but it does not ensure that all decision logic has been tested. Of the two white box
 techniques discussed in here, statement testing may provide less coverage than decision
 testing.
 When 100% decision coverage is achieved, it executes all decision outcomes, which includes testing the
@@ -87,13 +87,13 @@ Achieving 100% decision coverage guarantees 100% statement coverage (but not vic
 Every point of entry and exit in the program has been invoked at least once, every condition in a decision in the program has taken all possible outcomes at least once, and each condition has been shown to affect that decision outcome independently. A condition is shown to affect a decision's outcome independently by varying just that condition while holding fixed all other possible conditions. The condition/decision criterion does not guarantee the coverage of all conditions in the module because in many test cases, some conditions of a decision are masked by the other conditions. Using the modified condition/decision criterion, each condition must be shown to be able to act on the decision outcome by itself, everything else being held fixed. The MC/DC criterion is thus much stronger than the condition/decision coverage.
 
 ### 2.4 Why MC/DC in Maple MMR2 
-Mutiple condition coverage is ideally best, but it may make so many test case, so we select the next strong coverage level of it.
-But If it is very important function (ex. sign-in, sign-up, etc) then it is recommneded the Mutiple condition coverage.
+Multiple condition coverage is ideally best, but it may make so many test case, so we select the next strong coverage level of it.
+But If it is very important function (ex. sign-in, sign-up, etc) then it is recommended the Multiple condition coverage.
 ![](./coverage_relationship.PNG)
 
 ## 3. How to define the Test Case 
 Mutiple condition coverage is ideally best, but it may make so many test case, so we select the next strong coverage level of it.
-Maple (MMR2) uses "Elementary Comparion Test" based on MC/DC.
+Maple (MMR2) uses "Elementary Comparison Test" based on MC/DC.
 
 ### 3.1 Idenfity the decision points
 ![](./3.1-new.PNG)
@@ -105,7 +105,7 @@ Maple (MMR2) uses "Elementary Comparion Test" based on MC/DC.
 ![](./3.4-new.PNG)
 
 ### 3.7 etc 
-There is another approach to archive the "Elementary Comparion Test" [Elementary Comparion Test of TestExpo](https://www.capgemini.dk/globalassets/denmark/testexpo/prasentationer/2015-prasentationer/testexpo15_rik-marselis_sogeti-group.pdf)
+There is another approach to achieve the "Elementary Comparison Test" [Elementary Comparison Test of TestExpo](https://www.capgemini.dk/globalassets/denmark/testexpo/prasentationer/2015-prasentationer/testexpo15_rik-marselis_sogeti-group.pdf)
 
 ## 4. Test Case & sample 
 ### 4.1 Input Field Validation Check case
@@ -115,9 +115,9 @@ Sign-up case, we can use Multiple condition coverage.
 
 ### 4.2 CRUD case
 ### 4.2.1 Read data case
-comming soon.
+coming soon.
 ### 4.2.2 Create/Udate/Delete data case
-comming soon.
+coming soon.
 
 
 
