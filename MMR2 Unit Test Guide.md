@@ -105,7 +105,11 @@ Maple (MMR2) uses "Elementary Comparison Test" based on MC/DC.
 ![](./3.4-new.PNG)
 
 ### 3.7 etc 
-There is another approach to achieve the "Elementary Comparison Test" [Elementary Comparison Test of TestExpo](https://www.capgemini.dk/globalassets/denmark/testexpo/prasentationer/2015-prasentationer/testexpo15_rik-marselis_sogeti-group.pdf)
+There is another approach to achieve the "Elementary Comparison Test". [Elementary Comparison Test of TestExpo](https://www.capgemini.dk/globalassets/denmark/testexpo/prasentationer/2015-prasentationer/testexpo15_rik-marselis_sogeti-group.pdf)
+
+![](./test_expo_1.PNG)
+
+![](./test_expo_2.PNG)
 
 ## 4. Test Case & sample 
 ### 4.1 Input Field Validation Check case
