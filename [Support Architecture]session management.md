@@ -5,279 +5,163 @@ This document was made as Frank Kim (Principal Solution Architect)' request.
 
 Libraries and reference site included:
 - [JWT for Android](https://github.com/auth0/JWTDecode.Android)
-- [JWT(JSON Web Tokens) : concept](https://jwt.io/)
+- [JWT(JSON Web Tokens)](https://jwt.io/)
+
+## History
+- Maple uses Okta for SSO(single sign-on) and receive some tokens(access_token, refresh_token, id_token) from Okta.
+- Maple app uses those tokens to access  backend system(digital pharmacy, qhr system)
+- If id_token is expired, it is possible to renew that token using refresh_token.
 
 ## Requirements
+- Maple App checks if access_token is expired or not, as the result it renew the tokens
 
-[History]
-- Maple use Okta for SSO(single sign on) and get some tokens(access_token, refresh_token, id_token) from Okta.
-- To access backend system(digital pharmacy, qhr system) , Maple app using those tokens.
--
-- [Android SDK](http://developer.android.com/sdk/index.html).
-- Min:Android 5.0(LOLLIPOP) [(API 21) ](http://developer.android.com/tools/revisions/platforms.html).
-- Max:Android 8.0(Oreo) [(API 27) ](http://developer.android.com/tools/revisions/platforms.html).
-- Latest Android SDK Tools and build tools.
+### How to implement it
 
-
-## Architecture
-
-This project follows MRR1's Android architecture guidelines that are based on [MVVM (Model-View-View Model)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel). Read more about them [Guide to app architecture](https://developer.android.com/jetpack/docs/guide). 
-
-![](./maple_mvvm_aproach_neethu.PNG)
-
-### How to define the responsibilities of MVVM
-
- It is based on "Separation of concerns , Better testable, Follow SOLID principles' .
-
-| MODEL Responsibilities |
-| ------------------| 
-| Retrofit         |
-| Shared Preferences   | 
-
-
-| VIEW(UI) Responsibilities |
-| ------------------| 
-| Working with android.view, android.widget, etc. |
-| Showing Dialogs, Toasts, Snackbars   | 
-| Event listeners*   | 
-| Starting Activities*   | 
-| Handling Menu   | 
-| Handling permisstions   | 
-| Other Android specific stuff & methods which require reference to the Activity Context | 
-* Event Listeners is defined in the view.
-
-
-| VIEWMODEL Responsibilities |
-| ------------------| 
-| Exposing state(progress, offline, empty, error,etc.)        |
-| Exposing data*   | 
-| Handling visibility   | 
-| Handling Extras & Arguments(Bundle)   | 
-| Input validation   | 
-| Executing data calls in the Model   | 
-| Executing UI commands in the View*   | 
-* ViewModel layer should be separated from Android specific classes.
-* ViewModel should use only the Application Context (start service , send broadcast, load resource values).
-
-'*' it is changeable in this project.
-
-p.s) reference : https://speakerdeck.com/petrnohejl/mvvm-architecture-on-android
-
-
-### How to implement a new screen following MVVM
-
-Imagine you have to implement a nutirition's some screen. 
-
-1. Create a new package under `maple/ui/modules/` called `nutirition`
-2. Create a new sub packages under `nutirition` 
-
-| package           | description        | Example                      |
-| ------------------| ----------------   | ---------------------------- |
-| nutirition        | pillar             |                              |
-|  - views          | activity           | `QuickRefillActivity`        |
-|  -- fragments     | fragment           | `HistoryFragment`            |
-|  - viewmodels     | viewmodel          | `PrescriptionsViewModel`     |
-|  - models         | model              | `PrescriptionStatusCodes`    |
-|  - interfaces     | interface          | `TransferStepValidation`     |
-|  - bindingmodels  | bindingmodel        | `AddPharmacyBindingModel`   |
-|  - adapter        | RecyclerViewAdapter | `HistoryAdapter`            |
-
-3. Create an new screen for Activity or Fragment called `activity_xyz`,`fragment_xyz`. as a result binding file is generated
-automatically `ActivityXyzBiding`.
-
+1. add JWT library - build.gradle(Module: MapleApplication)
 ```xml
-//screen file: activity_xyz.xml
-
-//define variable
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <data>
-        <variable
-            name="xyzViewModel"
-            type="ca.shoppersdrugmart.maple.ui.modules.nutirition.viewmodels.XyzViewModel"/>
-    </data>
- 
- ...
- 
- <include
-    android:id="@+id/xyz_cta"
-    layout="@layout/view_generic_button"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/default_button_height"
-    android:layout_marginTop="@dimen/margin_xlarge"
-    app:click='@{(v) -> xyzViewModel.loadData()}'
-  ....   
-          
+    //JWTDecode.Android
+    implementation ('com.auth0.android:jwtdecode:1.2.0'){
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
 ```
 
-4. Create an new ViewModel for Activity or Fragment called `XyzViewModel`. 
- 
+2. add a new endpoint to get the new tokens - OktaService.java
 ```java
 
-    //define variable
-    private final LiveData<Resource<XyzDataModel>> mXyz;
+    // OAuth2 get new token by refresh token
+    @FormUrlEncoded
+    @POST("oauth2/v1/token")
+    Call<TokenResponseModel> doGetNewTokens(@Field("client_id") String client_id, @Field("grant_type") String grant_type,
+    @Field("scope") String scope, @Field("refresh_token") String refresh_token, @Field("redirect_uri") String redirect_uri);
+```
 
-    //define observemethod for activity
-    public LiveData<Resource<XyzDataModel>> observeXyz() {
-            return mXyz;
+3. add new variable to save the tokens - ApiController.java
+```java
+
+    private TokenResponseModel mTokenResponseModel;
+    
+    //get
+    public TokenResponseModel getTokenResponseModel() {
+        return mTokenResponseModel;
     }
 
-    //add Transformations.map to  in constructor
-    public XyzViewModel() {
-            mXyz = Transformations.map(mXyzRepo.observeXyzData(), xyz -> {
-                mLoading.set(xyz.status == Status.LOADING);
-                return xyz;
-            });
-    }
-
-    //define method to call Repo
-    public void loadData() {
-            mXyzRepo.getLoadData();
+    //set
+    public void setTokenResponseModel(TokenResponseModel tokenResponseModel) {
+        mTokenResponseModel = tokenResponseModel;
     }
 
 ```
 
-5. Create an new Activity called `XyzActivity`. You could also use a Fragment.
-
+4. add mApi.setTokenResponseModel to save the tokens - AuthenticationRepository.java
 ```java
 
-public class XyzActivity extends BaseActivity<ActivityXyzBiding, XyzViewModel> {
+       public LiveData<Resource<TokenResponseModel>> observeTokens() {
+        mTokenObserver = primaryAuthModel -> {
+            if (primaryAuthModel == null) return;
+            mTokens = primaryAuthModel.body;
+            mApi.setOktaIdToken(primaryAuthModel.body.id_token);
 
-    //view models
-    private XyzViewModel mXyzViewModel;
+            //[add]setTokenResponseModel
+            mApi.setTokenResponseModel(primaryAuthModel.body);
 
-    //onCreate
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        ....
-
-        //LiveData observe 
-        mXyzViewModel.observeXyz().observe(this, xyzDataModel ->{
-           // do something..
-
-        });
-    }
-
-    @Override
-    public int getBindingVariable() {
-        return BR.xyzViewModel;
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_xyz;
-    }
-
-    @Override
-    public XyzViewModel getViewModel() {
-        mXyzViewModel = ViewModelProviders.of(this).get(XyzViewModel.class);
-        return mXyzViewModel;
-    }
-
-
-
-```
-6. Create an new Java Class called `NutritionRepository`. You should add this to Dagger.
-
-```java
-
-public class NutritionRepository extends BaseRepository {
-
-    private final MediatorLiveData<Resource<XyzDataModel>> mXyzResponse = new MediatorLiveData<>();
-    private Observer<ApiResponse<XyzDataModel>> mXyzResponseObserver;
-
-    private XyzDataModel mXyzDataModel = new XyzDataModel();
-
-    public XyzRepository getXyzDataModel() {
-        return mXyzDataModel;
-    }
-
-    public LiveData<Resource<XyzDataModel>> observeXyzData() {
-        mXyzResponseObserver = xyzDataGenericModel -> {
-            if (xyzDataGenericModel == null) return;
-            mXyzDataModel = xyzDataGenericModel.body;
         };
 
-        return mXyzResponse;
+        return mTokenResponse;
     }
 
-    //if there are parameters..
-    //public void getLoadData(..param1,..param2,...) {
-    //esle no paramters
-    public void getLoadData() {
+```
 
-        //.. set parameter
-        XyzPayload payload = new XyzPayload();
-        payload.param1 = param1;
-        payload.param2 = param2;
+5.add check logic and renew token logic - BaseRepository.java
+5.1 add check logic
+```java
+   protected <T> void genericCall(MediatorLiveData<Resource<T>> mediator,
+            LiveData<ApiResponse<T>> retrofitCall, Observer<ApiResponse<T>> onChanged,
+            Class<T> clazz) {
         
-        genericCall(mXyzResponse, mApi.getNutritionService().getData(payload),mXyzResponseObserver);
+        mediator.setValue(Resource.loading(null));
+
+        /**
+         * [Add]
+         * 1. check where TokenResponseModel has a value
+         * 2. expiration check of id_token
+         * 3. if id_token is expired, call renewal method
+         */
+        TokenResponseModel tokenResponseModel = mApi.getTokenResponseModel();
+        
+        if (tokenResponseModel != null && !TextUtils.isEmpty(tokenResponseModel.id_token)) {
+            try {
+                JWT jwt = new JWT(tokenResponseModel.id_token);
+                boolean isExpired = jwt.isExpired(tokenResponseModel.expires_in);
+
+                if (isExpired) {
+                  renewOktaToken(tokenResponseModel);
+                }
+                
+            } catch (DecodeException e) {
+                Log.e(TAG, "DecodeException : " + e.getMessage());
+            }
+
+        }
+
+      mediator.addSource(retrofitCall, apiResponse -> {
+      ......
+```
+
+5.2 add renew token logic
+```java
+   private void renewOktaToken(TokenResponseModel tokenResponseModel) {
+        String grant_type = "refresh_token";
+        String client_id = BuildConfig.OKTA_CLIENT_ID;
+        String redirect_rui = "pcv://login/appredirect"; //from AuthenticationRepository
+        String refresh_token = tokenResponseModel.refresh_token;
+        String scope = tokenResponseModel.scope;
+
+        genericCallForNewToken(client_id, grant_type, scope, refresh_token,
+                redirect_rui,tokenResponseModel);
     }
 ```
 
-7. Add an new Interface Class called `NutritionService`
+5.3 add retrofit2 logic (http call)
 ```java
 
-public interface NutritionService {
+     protected void genericCallForNewToken(String client_id, String grant_type, String scope,
+            String refresh_token, String redirect_rui, TokenResponseModel tokenResponseModel) {
 
-    ...
+        retrofit2.Call<TokenResponseModel> call = mApi.getOktaService().doGetNewTokens
+                (client_id, grant_type, scope, refresh_token, redirect_rui);
 
-    @GET("xxx/yyyy")
-    LiveData<ApiResponse<XyzDataModel>> getData();
+        call.enqueue(new retrofit2.Callback<TokenResponseModel>() {
+            @Override
+            public void onResponse(retrofit2.Call<TokenResponseModel> call,
+                    retrofit2.Response<TokenResponseModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
 
-    ...
-}
-    
-```
+                    tokenResponseModel.scope = response.body().scope;
+                    tokenResponseModel.token_type = response.body().token_type;
+                    tokenResponseModel.access_token = response.body().access_token;
+                    tokenResponseModel.refresh_token = response.body().refresh_token;
+                    tokenResponseModel.id_token = response.body().id_token;
+                    tokenResponseModel.expires_in = response.body().expires_in;
+
+                    //update tokens
+                    mApi.setOktaIdToken(tokenResponseModel.id_token);
+                    mApi.setTokenResponseModel(tokenResponseModel);
+
+                } else {
+                    Log.e(TAG, "genericCallForNewToken reponse is fail or null");
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<TokenResponseModel> call, Throwable t) {
+                Log.e(TAG, "genericCallForNewToken onFailure :" + t.getMessage());
+            }
+        });
 
 
-8. Update method called `getNutritionService()` at ApiController(../data/sources/remote/rest).
-
-```java
-
-public class ApiController {
-    ...
-    //add
-    private NutritionService mNutritionService;
-    ...
-    //update mBaseUrlNutrition
-    private String mBaseUrlMaple, mBaseUrlMedeo, mBaseUrlOkta, mBaseUrlNutrition;
-    ...
-    
-    //update String nutritionBaseUrl
-    public void init(final Context context, String mapleBaseUrl, String medeoBaseUrl, String oktaBaseUrl, 
-String nutritionBaseUrl, String environment) {
-    
-    ...
-    //add
-    mBaseUrlNutrition = nutritionBaseUrl;
-    ...
-    
-    //add
-    mNutritionService = buildService(mBaseUrlNutrition).create(NutritionService.class);
-    
     }
-    
-    //add
-    public NutritionService getNutritionService() {
-        return mNutritionService;
-    }
-    
 ```
 
-9. Add method called `provideNutritionRepository()` at RepositoriesModule(../data/di/module).
-
-```java
-
-   @Singleton
-   @Provides
-   public NutritionRepository provideNutritionRepository(){
-      return new NutritionRepository();
-   }
-   
-```
 
 10. Call & Event Flow.
 ![](./CallandEventFlow.PNG)
@@ -289,53 +173,7 @@ This project integrates a combination of unit tests, functional test and code an
 
 ### Tests
 
-To run **unit** tests on your machine:
 
-``` 
-./gradlew test
-``` 
-
-To run **functional** tests on connected devices:
-
-``` 
-./gradlew connectedAndroidTest
-``` 
-
-Note: For Android Studio to use syntax highlighting for Automated tests and Unit tests you **must** switch the Build Variant to the desired mode.
-
-### Code Analysis tools 
-
-The following code analysis tools are set up on this project:
-
-* [PMD](https://pmd.github.io/): It finds common programming flaws like unused variables, empty catch blocks, unnecessary object creation, and so forth. See [this project's PMD ruleset](config/quality/pmd/pmd-ruleset.xml).
-
-``` 
-./gradlew pmd
-```
-
-* [Findbugs](http://findbugs.sourceforge.net/): This tool uses static analysis to find bugs in Java code. Unlike PMD, it uses compiled Java bytecode instead of source code.
-
-```
-./gradlew findbugs
-```
-
-* [Checkstyle](http://checkstyle.sourceforge.net/): It ensures that the code style follows [our Android code guidelines](https://github.com/ribot/android-guidelines/blob/master/project_and_code_guidelines.md#2-code-guidelines). See our [checkstyle config file](config/quality/checkstyle/checkstyle-config.xml).
-
-```
-./gradlew checkstyle
-```
-
-### The check task
-
-To ensure that your code is valid and stable use check: 
-
-```
-./gradlew check
-```
-
-This will run all the code analysis tools and unit tests in the following order:
-
-![Check Diagram](https://github.com/mojeayeun/dev_guide/blob/master/check-task-diagram.png)
  
 
 
