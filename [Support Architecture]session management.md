@@ -1,26 +1,18 @@
 
-# Maple MMR2 Architecture Guidelines
+# Session management supportig document
 
-Maple (MMR2) uses MMR1 output as a reference.
+This document was made as Frank Kim (Principal Solution Architect)' request.
 
-Libraries and tools included:
-
-- Support libraries
-- [Architecture Components](https://developer.android.com/topic/libraries/architecture/)
-- [Retrofit 2](http://square.github.io/retrofit/)
-- [Dagger 2](http://google.github.io/dagger/)
-- [Picasso](http://square.github.io/picasso/)
-- [Hockey](https://hockeyapp.net/)
-- [Glide](https://github.com/bumptech/glide)
-
-- Functional tests with [Espresso](https://google.github.io/android-testing-support-library/docs/espresso/index.html)
-- [Robolectric](http://robolectric.org/)
-- [Mockito](http://mockito.org/)
-- [Checkstyle](http://checkstyle.sourceforge.net/), [PMD](https://pmd.github.io/) and [Findbugs](http://findbugs.sourceforge.net/) for code analysis
+Libraries and reference site included:
+- [JWT for Android](https://github.com/auth0/JWTDecode.Android)
+- [JWT(JSON Web Tokens) : concept](https://jwt.io/)
 
 ## Requirements
 
-- JDK 1.8
+[History]
+- Maple use Okta for SSO(single sign on) and get some tokens(access_token, refresh_token, id_token) from Okta.
+- To access backend system(digital pharmacy, qhr system) , Maple app using those tokens.
+-
 - [Android SDK](http://developer.android.com/sdk/index.html).
 - Min:Android 5.0(LOLLIPOP) [(API 21) ](http://developer.android.com/tools/revisions/platforms.html).
 - Max:Android 8.0(Oreo) [(API 27) ](http://developer.android.com/tools/revisions/platforms.html).
