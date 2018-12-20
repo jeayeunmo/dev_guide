@@ -15,6 +15,11 @@ Libraries and reference site included:
 ## Requirements
 - Maple App checks if access_token is expired or not, as the result it renew the tokens
 
+## Data Flow
+- Maple App takes "OKTA token" using login id/password after authentication/authorization and it can get the "super token" using OKTA's id_token.
+
+![](./OKTA_dataflow.PNG)
+
 ### How to implement it
 
 1. add JWT library - build.gradle(Module: MapleApplication)
