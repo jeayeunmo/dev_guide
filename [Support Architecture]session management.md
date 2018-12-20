@@ -72,7 +72,7 @@ Libraries and reference site included:
 ```
 
 5.add check logic and renew token logic - BaseRepository.java
-5.1 add check logic
+5.1 add check method
 ```java
    protected <T> void genericCall(MediatorLiveData<Resource<T>> mediator,
             LiveData<ApiResponse<T>> retrofitCall, Observer<ApiResponse<T>> onChanged,
@@ -80,34 +80,52 @@ Libraries and reference site included:
         
         mediator.setValue(Resource.loading(null));
 
-        /**
-         * [Add]
-         * 1. check where TokenResponseModel has a value
-         * 2. expiration check of id_token
-         * 3. if id_token is expired, call renewal method
-         */
-        TokenResponseModel tokenResponseModel = mApi.getTokenResponseModel();
-        
-        if (tokenResponseModel != null && !TextUtils.isEmpty(tokenResponseModel.id_token)) {
-            try {
-                JWT jwt = new JWT(tokenResponseModel.id_token);
-                boolean isExpired = jwt.isExpired(tokenResponseModel.expires_in);
-
-                if (isExpired) {
-                  renewOktaToken(tokenResponseModel);
-                }
-                
-            } catch (DecodeException e) {
-                Log.e(TAG, "DecodeException : " + e.getMessage());
-            }
-
-        }
+       //add session check method
+        validateExpiredSessionOfOktaToken();
 
       mediator.addSource(retrofitCall, apiResponse -> {
       ......
 ```
 
-5.2 add renew token logic
+5.2 implement session check method
+```java
+  /**
+     * [Add]
+     * 1. check where TokenResponseModel has a value
+     * 2. check expiration of refresh_token
+     * 3. if refresh_token is not expired check expiration  of id_token
+     * 4. if id_token is expired, call renewal method
+     */
+    private void validateExpiredSessionOfOktaToken() {
+        
+        TokenResponseModel tokenResponseModel = mApi.getTokenResponseModel();
+
+        if (tokenResponseModel != null && !TextUtils.isEmpty(tokenResponseModel.id_token)) {
+            try {
+                JWT jwt;
+                boolean isExpired;
+             
+                jwt = new JWT(tokenResponseModel.refresh_token);
+                isExpired = jwt.isExpired(tokenResponseModel.expires_in);
+
+                if (!isExpired) {
+                    jwt = new JWT(tokenResponseModel.id_token);
+                    isExpired = jwt.isExpired(tokenResponseModel.expires_in);
+
+                    if (!isExpired) {
+                        renewOktaToken(tokenResponseModel);
+                    } 
+                }
+
+            } catch (DecodeException e) {
+                Log.e(TAG, "DecodeException : " + e.getMessage());
+            }
+
+        }
+    }
+```
+
+5.3 add renew token logic
 ```java
    private void renewOktaToken(TokenResponseModel tokenResponseModel) {
         String grant_type = "refresh_token";
@@ -121,7 +139,7 @@ Libraries and reference site included:
     }
 ```
 
-5.3 add retrofit2 logic (http call)
+5.4 add retrofit2 logic (http call)
 ```java
 
      protected void genericCallForNewToken(String client_id, String grant_type, String scope,
