@@ -150,7 +150,7 @@ http://www.jidum.com/jidums/view.do?jidumId=590
 호출-있다-보여준다
 호출-없다-안보여준다
 
-이게..다다.. 맞는지..확인 필요하다.
+이게..다다.. 맞는지..확인 필요하다.11
 
 #### 다음
 https://www.slideshare.net/genycho/ss-64153730
