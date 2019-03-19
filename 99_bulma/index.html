@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mo Jea Yeun</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script>
+    //https://develop88.tistory.com/entry/div안에-페이지-불러오기 [왕 Blog]
+    $(document).ready(function(){
+        $("#div1").load("https://github.com/jeayeunmo/dev_guide/blob/master/MMR2%20Architecture%20Guidelines.md");
+    });
+
+    </script>
+
+</head>
+
+
+
+
+  </head>
+  <body>
+    <section class="hero is-medium is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns">
+            <div class="column is-8-desktop is-offset-2-desktop">
+              <h1 class="title is-2 is-spaced">
+                Maple Project : PC vida
+              </h1>
+              <h2 class="subtitle is-4">
+                  Maple Android App is implemented <strong>MVVM Architecture</strong> based on <strong>Android Architecture Components</strong>. <br>
+                  It uses <strong>Databinding</strong> and <strong>LiveData</strong> technologies to communicate data and events between UI-ViewModel-Repository.
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+   
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Andy.Mo</h1>
+        <h2 class="subtitle">
+          As senior software developer, I built <strong>guideline</strong> and developed nutrition and enhanced the exsising application. <br><br>
+        </h2>
+        <div class="columns">
+            <div class="column is-one-fifth">
+                <aside class="menu">
+                    <p class="menu-label">
+                      Guideline
+                    </p>
+                    <ul class="menu-list">
+                      <li><a>Structure & Code</a></li>
+                      <li><a>Static Analysis</a></li>
+                      <li><a>Unit Test</a></li>
+                    </ul>
+                    <p class="menu-label">
+                        Common code
+                      </p>
+                      <ul class="menu-list">
+                        <li><a>Secured Shared Preference</a></li>
+                        <li><a>Authorization-Okta</a></li>
+                      </ul>
+                    </p>
+                    <p class="menu-label">
+                        Development
+                    </p>  
+                    <ul class="menu-list">
+                      <li><a>Nutiration</a></li>
+                      <li>
+                        <a class="is-active">Enhancement</a>
+                        <ul>
+                          <li><a>Statistic</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <p class="menu-label">
+                      Technical Article
+                    </p>
+                    <ul class="menu-list">
+                      <li><a>Variable .vs. Memory</a></li>
+                    </ul>
+                  </aside>
+            </div>
+            <div  id="div1" class="column is-full" style="background-color: red" >
+              Second column
+            </div>
+          
+          </div>
+
+        
+      </div>
+    </section>
+
+    <footer class="footer has-text-centered">
+      <div class="container">
+         <div class="columns">
+          <div class="column is-8-desktop is-offset-2-desktop">
+            <p>
+              <strong class="has-text-weight-semibold">
+                <a href="#">made by Mo Jea Yeun with BULMA</a>
+              </strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script type="text/javascript" src="lib/main.js"></script>
+  </body>
+</html>
